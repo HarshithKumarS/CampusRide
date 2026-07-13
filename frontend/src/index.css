@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6;      /* Blue 500 */
+  --color-primary-dark: #1d4ed8; /* Blue 700 */
+  --color-primary-light: #eff6ff;/* Blue 50 */
+  --color-accent: #2563eb;       /* Blue 600 */
+}
+
+/* Base resets & utilities */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc; /* Slate 50 */
+  color: #0f172a; /* Slate 900 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #0f172a; /* Slate 900 */
+  color: #f8fafc; /* Slate 50 */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Bus road animation */
+@keyframes move-road {
+  0% {
+    background-position-x: 0px;
+  }
+  100% {
+    background-position-x: -80px;
+  }
+}
+
+.animate-road {
+  background-image: linear-gradient(
+    90deg,
+    #ffffff 0%, #ffffff 50%,
+    transparent 50%, transparent 100%
+  );
+  background-size: 80px 12px;
+  animation: move-road 1.2s linear infinite;
+}
+
+/* Bus vibration */
+@keyframes bus-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-bus {
+  animation: bus-bounce 0.18s ease-in-out infinite;
+}
+
+/* Cloud floating */
+@keyframes float-cloud-1 {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes float-cloud-2 {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.animate-cloud-1 {
+  animation: float-cloud-1 25s linear infinite;
+}
+
+.animate-cloud-2 {
+  animation: float-cloud-2 35s linear infinite;
+}
+
+/* Stop-by-stop track animations */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
