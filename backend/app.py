@@ -12,7 +12,15 @@ def create_app():
     app.config.from_object(Config)
     
     # Configure CORS: Allow React frontend on localhost:5173
-    CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+    CORS(
+    app,
+    supports_credentials=True,
+    origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://campus-ride-sigma.vercel.app"
+    ]
+)
     
     # Initialize DB
     db.init_app(app)
