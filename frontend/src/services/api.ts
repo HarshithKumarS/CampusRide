@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const backendHost = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-
 const api = axios.create({
-  baseURL: `http://${backendHost}:5000/api`,
+  baseURL: 'https://campusride-bn3g.onrender.com/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
