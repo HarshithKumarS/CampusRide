@@ -9,6 +9,7 @@ class Config:
     
     # Session config
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = "None"
     # In a real environment, set to True if HTTPS is used
-    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = True
+    
