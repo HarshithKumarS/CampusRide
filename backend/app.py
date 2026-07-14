@@ -11,16 +11,14 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
-    # Configure CORS: Allow React frontend on localhost:5173
     CORS(
-    app,
-    supports_credentials=True,
-    origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://campus-ride-sigma.vercel.app"
-    ]
-)
+        app,
+        supports_credentials=True,
+        origins=[
+            "http://localhost:5173",
+            "http://127.0.0.1:5173"
+        ]
+    )
     
     # Initialize DB
     db.init_app(app)
@@ -62,6 +60,13 @@ def create_app():
     # Ensure tables exist
     with app.app_context():
         db.create_all()
+        try:
+            if User.query.first() is None:
+                print("No users found in SQLite database. Executing automatic seeding...")
+                from seed import seed_db
+                seed_db(drop_tables=False)
+        except Exception as e:
+            print(f"Error checking/seeding database at startup: {e}")
         
     return app
 
@@ -70,3 +75,4 @@ app = create_app()
 if __name__ == '__main__':
     # Run the server on port 5000
     app.run(host='0.0.0.0', port=5000, debug=True)
+    # Dev reload check comment

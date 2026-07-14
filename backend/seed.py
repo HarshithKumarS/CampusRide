@@ -1,12 +1,12 @@
-from app import app
 from database import db
 from models.models import User, Bus, Route, Announcement, ActiveJourney
 
-def seed_db():
+def seed_db(drop_tables=True):
     print("Seeding database with updated rules...")
     
-    # 1. Clear existing tables
-    db.drop_all()
+    # 1. Clear/Create tables
+    if drop_tables:
+        db.drop_all()
     db.create_all()
     
     # 2. Create standard users
@@ -66,7 +66,7 @@ def seed_db():
     student2.set_password("bob123")
     db.session.add(student2)
 
-    # Professor: Staff member (Male but is_staff=True, so has access to girls/staff rows)
+    # Professor: Staff member
     student3 = User(
         email="prof@campusride.col",
         name="Professor Higgins",
@@ -80,7 +80,7 @@ def seed_db():
     db.session.add(student3)
     
     db.session.commit()
-    print("Users created: admin, driver1, driver2, Alice (female), Bob (male), Prof (staff)")
+    print("Users created: admin, driver1, driver2, Alice, Bob, Prof")
     
     # 3. Create Routes
     route_a = Route(
@@ -169,8 +169,9 @@ def seed_db():
     db.session.commit()
     print("Active journeys seeded")
     
-    print("Database seeded successfully with updated rules!")
+    print("Database seeded successfully!")
 
 if __name__ == '__main__':
+    from app import app
     with app.app_context():
-        seed_db()
+        seed_db(drop_tables=True)
